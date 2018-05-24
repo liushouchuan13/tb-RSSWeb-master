@@ -1,0 +1,19 @@
+
+stages:
+  - dev
+  - deploy
+
+before_script:
+  - pipenv install
+  - pipenv shell
+
+
+startDev:
+  stage: dev
+  script:
+    - python manage.py runserver 0.0.0.0:8000
+
+startDeploy:
+  stage: deploy
+  script:
+    - python manage.py runserver 0.0.0.0:8888

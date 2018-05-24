@@ -1,0 +1,55 @@
+{% load staticfiles %}
+
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {#    <link rel="icon" href="../../favicon.ico">#}
+
+    <title>登录界面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content.css">
+</head>
+<body>
+    <!--导航栏 -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-nav">
+                    <li><a href="{% url 'users:register' %}">注册</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="container">
+        <div class="page-header">
+            {% block header %}
+                <h2>输入你的用户名</h2>
+            {% endblock %}
+        </div>
+        <div>
+            {% block content %}
+                <form method="post" action="{% url 'users:login' %}" class="form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+
+                    <button name="submit" class="btn btn-primary">登录</button>
+
+                    <input type="hidden" name="next" value="{% url 'index' %}"/>
+                </form>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+<html>
